@@ -44,11 +44,18 @@ function calcularMeses () {
 
 calcularMeses ()
 
-//CALCULACION DE AñS DE PLAZO
+//CALCULACION DE AñoS DE PLAZO
 const añosPlazo = mesesSolicitados /12,
     tasaAnual = 0.20; // 20% Anual - TASA DE INTERES ANUAL FIJA
     interesTotal = montoSolicitado * tasaAnual * añosPlazo,
     totalPagar = montoSolicitado + interesTotal,
     cuotaMensual = totalPagar / mesesSolicitados;
 
-alert (`Resumen del prestamo para ${nombreUsuario}`)
+alert (`Resumen del prestamo para ${nombreUsuario}:
+
+Monto solicitado: $${montoSolicitado}
+Plazo: ${mesesSolicitados} meses (${añosPlazo.toFixed(1)} años)
+Interés total: $${interesTotal.toFixed(2)}
+Total a pagar: $${totalPagar.toFixed(2)}
+Cuota mensual: $${cuotaMensual.toFixed(2)}
+`);
