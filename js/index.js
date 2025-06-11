@@ -18,12 +18,14 @@ montoIngresado = montoIngresado.replace(/\D/g, "");
 let montoSolicitado = parseInt (montoIngresado);
 
 const montoMaximo = 100000; // Maximo permitido
+let montoValido = false;
 
 function calcularPrestamo () {
     if (!isNaN(montoSolicitado) && montoSolicitado <= montoMaximo && montoSolicitado > 0) {
-        alert ("El monto ingresado es valido")
+        alert ("El monto ingresado es valido");
+        montoValido = true;
     } else {
-        alert ("El monto es inválido o supera el límite de $100.000. Inténtalo de nuevo.")
+        alert ("El monto es inválido o supera el límite de $100.000. Inténtalo de nuevo.");
     }
 }
 
@@ -36,12 +38,14 @@ plazoMeses = plazoMeses.replace(/\D/g, "");
 let mesesSolicitados = parseInt (plazoMeses);
 
 const mesesMaximos = 68; // Meses maximos permitidos
+mesesValidos = false;
 
 function calcularMeses () {
     if (!isNaN(mesesSolicitados) && mesesSolicitados <= mesesMaximos && mesesSolicitados > 0) {
-        alert ("La cantidad de meses ingresada es valida")
+        alert ("La cantidad de meses ingresada es valida");
+        mesesValidos = false;
     } else {
-        alert ("La cantidad de meses es invalida, por favor ingrese otra cantidad dentro del maxiomo")
+        alert ("La cantidad de meses es invalida, por favor ingrese otra cantidad dentro del maxiomo");
     }
 }
 
@@ -49,17 +53,21 @@ calcularMeses ()
 
 
 //CALCULACION DE AñoS DE PLAZO
-const añosPlazo = mesesSolicitados /12,
-    tasaAnual = 0.20; // 20% Anual - TASA DE INTERES ANUAL FIJA
-    interesTotal = montoSolicitado * tasaAnual * añosPlazo,
-    totalPagar = montoSolicitado + interesTotal,
-    cuotaMensual = totalPagar / mesesSolicitados;
+if (montoValido && mesesValidos){
+    const añosPlazo = mesesSolicitados /12,
+        tasaAnual = 0.20; // 20% Anual - TASA DE INTERES ANUAL FIJA
+        interesTotal = montoSolicitado * tasaAnual * añosPlazo,
+        totalPagar = montoSolicitado + interesTotal,
+        cuotaMensual = totalPagar / mesesSolicitados;
 
-alert (`Resumen del prestamo para ${nombreUsuario}:
+    alert (`Resumen del prestamo para ${nombreUsuario}:
 
-Monto solicitado: $${montoSolicitado}
-Plazo: ${mesesSolicitados} meses (${añosPlazo.toFixed(1)} años)
-Interés total: $${interesTotal.toFixed(2)}
-Total a pagar: $${totalPagar.toFixed(2)}
-Cuota mensual: $${cuotaMensual.toFixed(2)}
+    Monto solicitado: $${montoSolicitado}
+    Plazo: ${mesesSolicitados} meses (${añosPlazo.toFixed(1)} años)
+    Interés total: $${interesTotal.toFixed(2)}
+    Total a pagar: $${totalPagar.toFixed(2)}
+    Cuota mensual: $${cuotaMensual.toFixed(2)}
 `);
+} else {
+    alert ("No se pudo general el resumen, por favor intente nuevamente y asegurese de que ponga bien los datos solicitados")
+}
