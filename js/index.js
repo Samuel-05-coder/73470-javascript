@@ -1,5 +1,4 @@
 // INICIO DEL SIMULADO (Prestamo personal)
-
 let nombreUsuario = prompt ("Pon tu nombre y apellido")
 
 function mostrarNombreUsuario() {
@@ -12,6 +11,8 @@ function mostrarNombreUsuario() {
 
 mostrarNombreUsuario();
 
+
+//MONTO
 let montoIngresado = prompt ("¿Cuánto deseas pedir prestado? (Máximo $100.000)");
 montoIngresado = montoIngresado.replace(/\D/g, "");
 let montoSolicitado = parseInt (montoIngresado);
@@ -28,6 +29,8 @@ function calcularPrestamo () {
 
 calcularPrestamo ()
 
+
+//MESES
 let plazoMeses = prompt ("Ingrese la cantidad de meses a pagar su prestamo (Maximo 68 meses)");
 plazoMeses = plazoMeses.replace(/\D/g, "");
 let mesesSolicitados = parseInt (plazoMeses);
@@ -43,6 +46,7 @@ function calcularMeses () {
 }
 
 calcularMeses ()
+
 
 //CALCULACION DE AñoS DE PLAZO
 const añosPlazo = mesesSolicitados /12,
