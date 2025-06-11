@@ -45,7 +45,7 @@ mesesValidos = false;
 function calcularMeses () {
     if (!isNaN(mesesSolicitados) && mesesSolicitados <= mesesMaximos && mesesSolicitados > 0) {
         alert ("La cantidad de meses ingresada es valida");
-        mesesValidos = false;
+        mesesValidos = true;
     } else {
         alert ("La cantidad de meses es invalida, por favor ingrese otra cantidad dentro del maxiomo");
     }
@@ -57,7 +57,7 @@ calcularMeses ()
 //CALCULACION DE AñoS DE PLAZO
 if (montoValido && mesesValidos){
     const añosPlazo = mesesSolicitados /12,
-        tasaAnual = 0.20; // 20% Anual - TASA DE INTERES ANUAL FIJA
+        tasaAnual = 0.15; // 15% Anual - TASA DE INTERES ANUAL FIJA
         interesTotal = montoSolicitado * tasaAnual * añosPlazo,
         totalPagar = montoSolicitado + interesTotal,
         cuotaMensual = totalPagar / mesesSolicitados;
