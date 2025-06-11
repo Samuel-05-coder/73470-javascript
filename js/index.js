@@ -1,4 +1,6 @@
 // INICIO DEL SIMULADO (Prestamo personal)
+
+//NOMBRE USUARIO
 let nombreUsuario = prompt ("Pon tu nombre y apellido")
 
 function mostrarNombreUsuario() {
@@ -71,3 +73,18 @@ if (montoValido && mesesValidos){
 } else {
     alert ("No se pudo general el resumen, por favor intente nuevamente y asegurese de que ponga bien los datos solicitados")
 }
+
+
+//ARRAY SOBRE LOS DATOS SOBRE EL PRESTAMO
+let historialPrestamo = [];
+
+historialPrestamo.push({
+    nombre: nombreUsuario,
+    monto: montoIngresado,
+    meses: plazoMeses,
+    tota: totalPagar
+});
+
+// FALTA MUCHO POR MEJORAR, PERO VAMOS MEJORANDO DE ACUERDO A LA PRACTICA
+//FALTA PONER CANTIDAD DE INTERES DE ACUERDO AL PLAZO EN MESES Y MONTO A PRESTAR
+//HACER QUE SE REPITA LA FUNCION CUANDO SE PONE UN DATO NO VALIDO
