@@ -24,11 +24,13 @@ const cuotaMensual = document.getElementById("cuotaMensual");
 const mensaje = document.getElementById("mensaje");
 const resultadoDiv = document.getElementById("resultado");
 const limpiarBoton = document.getElementById("Limpiar");
+const historialDiv = document.getElementById("historial");
+const borrarHistorialBtn = document.getElementById("borrarHistorial");
 
 // Historial
 let historialPrestamos = JSON.parse(localStorage.getItem("historialPrestamos")) || [];
 
-// Función principal
+// Función para simular el préstamo
 function simularPrestamo(e) {
     e.preventDefault();
 
@@ -61,9 +63,11 @@ function simularPrestamo(e) {
     mensaje.textContent = "Simulación realizada correctamente.";
 
     resultadoDiv.style.display = "block";
+
+    mostrarHistorial();
 }
 
-// Limpiar pantalla y formulario
+// Función para limpiar los resultados
 function limpiarResultados() {
     form.reset();
     nombreUsuario.textContent = "";
@@ -74,6 +78,53 @@ function limpiarResultados() {
     resultadoDiv.style.display = "none";
 }
 
+// Función para mostrar historial
+function mostrarHistorial() {
+    historialDiv.innerHTML = "";
+    if (historialPrestamos.length === 0) {
+        historialDiv.innerHTML = "<p>No hay historial disponible.</p>";
+        return;
+    }
+
+    historialPrestamos.forEach((p, index) => {
+        const div = document.createElement("div");
+        div.classList.add("historial-item");
+        div.innerHTML = `
+            <p><strong>#${index + 1}</strong></p>
+            <p>${p.nombre} ${p.apellido} - DNI: ${p.dni}</p>
+            <p>Préstamo: $${p.monto} - Plazo: ${p.plazo} meses</p>
+            <p>Total a pagar: $${p.total}</p>
+            <button class="eliminarBtn" data-index="${index}">Eliminar</button>
+            <hr>
+        `;
+        historialDiv.appendChild(div);
+    });
+
+    const eliminarBtns = document.querySelectorAll(".eliminarBtn");
+    eliminarBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const index = e.target.getAttribute("data-index");
+            eliminarPrestamo(index);
+        });
+    });
+}
+
+// Eliminar préstamo específico
+function eliminarPrestamo(index) {
+    historialPrestamos.splice(index, 1);
+    localStorage.setItem("historialPrestamos", JSON.stringify(historialPrestamos));
+    mostrarHistorial();
+}
+
+// Eliminar todo el historial
+borrarHistorialBtn.addEventListener("click", () => {
+    if (confirm("¿Estás seguro de borrar todo el historial?")) {
+        localStorage.removeItem("historialPrestamos");
+        historialPrestamos = [];
+        mostrarHistorial();
+    }
+});
+
 // Eventos
 form.addEventListener("submit", simularPrestamo);
 limpiarBoton.addEventListener("click", limpiarResultados);
@@ -81,4 +132,5 @@ limpiarBoton.addEventListener("click", limpiarResultados);
 // Mostrar historial al cargar
 window.addEventListener("load", () => {
     resultadoDiv.style.display = "none";
+    mostrarHistorial();
 });
